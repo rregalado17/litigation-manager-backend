@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+lawyer1 = Lawyer.create(first_name: 'Howard', last_name: 'Zelbo')
+
+litigation1 = Litigation.create(lawyer_id: 1, caption: 'A vs. B', court: 'SDNY', status: 'Active')
+litigation2 = Litigation.create(lawyer_id: 1, caption: 'A vs. B', court: 'SDNY')
