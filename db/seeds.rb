@@ -8,4 +8,4 @@
 lawyer1 = Lawyer.create(first_name: 'Howard', last_name: 'Zelbo')
 
 litigation1 = Litigation.create(lawyer_id: 1, caption: 'A vs. B', court: 'SDNY', status: 'Active')
-litigation2 = Litigation.create(lawyer_id: 1, caption: 'A vs. B', court: 'SDNY')
+litigation2 = Litigation.create(lawyer_id: 1, caption: 'C vs. D', court: 'EDNY', status: 'Concluded')

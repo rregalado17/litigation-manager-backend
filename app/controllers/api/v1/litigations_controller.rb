@@ -13,7 +13,7 @@ class Api::V1::LitigationsController < ApplicationController
     end
 
     def create 
-        @litigation = @lawyer.litigation.buildaZ(litigation_params)
+        @litigation = @lawyer.litigation.build(litigation_params)
         if @litigation.save
             render json: @litigation
         else
