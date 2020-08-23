@@ -1,6 +1,7 @@
 class Api::V1::LawyersController < ApplicationController
 
     def index
+
         @lawyers = Lawyer.all 
         render json: @lawyers
     end
@@ -15,17 +16,19 @@ class Api::V1::LawyersController < ApplicationController
     end
 
     def show
-
+        @lawyer = Lawyer.find(params[:id])
+        render json: @lawyer 
     end
 
     def destroy 
-
+        @lawyer = Lawyer.find(params[:id])
+        @lawyer.destroy
     end
 
     private
-
+    
     def lawyer_params
-        params.require(:lawyer).permit(:first_name)
+        params.require(:lawyer).permit(:first_name, :last_name, :cases, :retainer)
     end
 
 end
