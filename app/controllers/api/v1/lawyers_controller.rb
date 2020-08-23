@@ -1,7 +1,6 @@
 class Api::V1::LawyersController < ApplicationController
 
     def index
-
         @lawyers = Lawyer.all 
         render json: @lawyers
     end
