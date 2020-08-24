@@ -15,7 +15,7 @@ class Api::V1::LitigationsController < ApplicationController
     def create 
         @litigation = @lawyer.litigation.build(litigation_params)
         if @litigation.save
-            render json: @litigation
+            render json: @lawyer
         else
             render json: {error: "Error creating litigation"}
         end
