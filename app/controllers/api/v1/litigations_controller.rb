@@ -13,7 +13,7 @@ class Api::V1::LitigationsController < ApplicationController
     end
 
     def create 
-        @litigation = @lawyer.litigation.build(litigation_params)
+        @litigation = @lawyer.litigations.new(litigation_params)
         if @litigation.save
             render json: @lawyer
         else
@@ -22,9 +22,15 @@ class Api::V1::LitigationsController < ApplicationController
     end
 
 
-    # def destroy 
-    #     @litigation = Litigation.find(params[:id])
-    #     @litigation.destroy
+    def destroy 
+        @litigation = Litigation.find(params[:id])
+        @lawyer = Lawyer.find(@litigation.lawyer_id)
+        @litigation.destroy
+        render json: @lawyer
+    end
+
+    # def update
+    #     binding.pry
     # end
 
     private
