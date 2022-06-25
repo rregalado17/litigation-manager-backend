@@ -1,15 +1,10 @@
 class Api::V1::LitigationsController < ApplicationController
 
-    before_action :set_lawyer
+    # before_action :set_lawyer
 
     def index
-        @litigations = @lawyer.litigations 
+        @litigations = Litigation.all
         render json: @litigations
-    end
-
-    def show
-        @litigation = @lawyer.litigations.find_by(id: params[:id])
-        render json: @litigation 
     end
 
     def create 
@@ -20,6 +15,13 @@ class Api::V1::LitigationsController < ApplicationController
             render json: {error: "Error creating litigation"}
         end
     end
+
+    def show
+        # @litigation = @lawyer.litigations.find_by(id: params[:id])
+        @litigation = Litigation.find(params[:id])
+        render json: @litigation 
+    end
+    
 
 
     def destroy 
@@ -34,9 +36,9 @@ class Api::V1::LitigationsController < ApplicationController
     # end
 
     private
-    def set_lawyer 
-        @lawyer = Lawyer.find(params[:lawyer_id])
-    end
+    # def set_lawyer 
+    #     @lawyer = Lawyer.find(params[:lawyer_id])
+    # end
 
     def litigation_params
         params.require(:litigation).permit(:lawyer_id, :caption, :court, :judge, :opposing_party, :status, :costs)
