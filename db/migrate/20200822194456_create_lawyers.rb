@@ -5,6 +5,7 @@ class CreateLawyers < ActiveRecord::Migration[6.0]
       t.string :last_name
       t.integer :cases
       t.integer :retainer
+      t.string :profile
 
       t.timestamps
     end

@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2020_08_22_194456) do
     t.string "last_name"
     t.integer "cases"
     t.integer "retainer"
+    t.string "profile"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
