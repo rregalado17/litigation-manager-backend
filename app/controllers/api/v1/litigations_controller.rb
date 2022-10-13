@@ -7,17 +7,26 @@ class Api::V1::LitigationsController < ApplicationController
         render json: @litigations
     end
 
+    # def create 
+    #     @litigation = @lawyer.litigations.new(litigation_params)
+    #     if @litigation.save
+    #         render json: @lawyer
+    #     else
+    #         render json: {error: "Error creating litigation"}
+    #     end
+    # end
+
     def create 
-        @litigation = @lawyer.litigations.new(litigation_params)
+        @litigation = Litigation.new(litigation_params)
         if @litigation.save
-            render json: @lawyer
+            render json: @litigation
         else
-            render json: {error: "Error creating litigation"}
+            render json: {error: "Error creating lawyer"}
         end
     end
 
     def show
-        # @litigation = @lawyer.litigations.find_by(id: params[:id])
+        @litigation = @lawyer.litigations.find_by(id: params[:id])
         @litigation = Litigation.find(params[:id])
         render json: @litigation 
     end
@@ -35,13 +44,33 @@ class Api::V1::LitigationsController < ApplicationController
     #     binding.pry
     # end
 
+    def update
+        @litigation = Litigation.find(params[:id])
+        @litigation.update(
+            caption: params["litigation"]["caption"],
+            court: params["litigation"]["court"], 
+            judge: params["litigation"]["judge"],
+            status: params["litigation"]["status"],
+            lawyer_id: params["litigation"]["lawyer_id"], )
+        @litigation.save
+        render json: @litigation
+    end
+
     private
     # def set_lawyer 
     #     @lawyer = Lawyer.find(params[:lawyer_id])
     # end
 
     def litigation_params
-        params.require(:litigation).permit(:lawyer_id, :caption, :court, :judge, :opposing_party, :status, :costs)
+        params.require(:litigation).permit(
+            :lawyer_id, 
+            :caption, 
+            :court, 
+            :judge, 
+            :opposing_party, 
+            :status, 
+            :costs
+        )
     end
 
 end
