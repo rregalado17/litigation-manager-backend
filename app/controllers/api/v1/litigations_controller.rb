@@ -35,7 +35,7 @@ class Api::V1::LitigationsController < ApplicationController
 
     def destroy 
         @litigation = Litigation.find(params[:id])
-        @lawyer = Lawyer.find(@litigation.lawyer_id)
+        # @lawyer = Lawyer.find(@litigation.lawyer_id)
         @litigation.destroy
         render json: @lawyer
     end
@@ -46,12 +46,25 @@ class Api::V1::LitigationsController < ApplicationController
 
     def update
         @litigation = Litigation.find(params[:id])
+        # if @litigation.update(params)
+        #     render json: user, status: :ok
+        #   else
+        #     render json: user.errors, status: :unprocessable_entity
+        #   end
         @litigation.update(
             caption: params["litigation"]["caption"],
             court: params["litigation"]["court"], 
             judge: params["litigation"]["judge"],
             status: params["litigation"]["status"],
-            lawyer_id: params["litigation"]["lawyer_id"], )
+            lawyer_id: params["litigation"]["lawyer_id"],
+            opposing_party: params["litigation"]["opposing_party"],
+            complaint_date: params["litigation"]["complaint_date"],
+            legal_areas: params["litigation"]["legal_areas"],
+            governing_law: params['litigation']['governing_law'],
+            industry: params['litigation']['industry'],
+            claims: params['litigation']['claims'],
+            counterclaims: params['litigation']['counterclaims']
+            )
         @litigation.save
         render json: @litigation
     end
@@ -63,14 +76,19 @@ class Api::V1::LitigationsController < ApplicationController
 
     def litigation_params
         params.require(:litigation).permit(
-            :lawyer_id, 
             :caption, 
             :court, 
             :judge, 
             :opposing_party, 
             :status, 
-            :costs
-        )
+            :costs,
+            :complaint_date,
+            :legal_areas,
+            :governing_law,
+            :industry,
+            :claims,
+            :counterclaims,
+            :lawyer_id
+            )
     end
-
 end

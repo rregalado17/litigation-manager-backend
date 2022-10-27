@@ -26,7 +26,15 @@ class Api::V1::LawyersController < ApplicationController
 
     def update
         @lawyer = Lawyer.find(params[:id])
-        @lawyer.update(first_name: params["lawyer"]["first_name"], last_name: params["lawyer"]["last_name"])
+        @lawyer.update(
+            first_name: params["lawyer"]["first_name"], 
+            last_name: params["lawyer"]["last_name"],
+            profile: params["lawyer"]["profile"],
+            practice: params["lawyer"]["practice"],
+            position: params["lawyer"]["position"],
+            law_school: params["lawyer"]["law_school"],
+            email: params["lawyer"]["email"],
+            phone: params["lawyer"]["phone"])
         @lawyer.save
         render json: @lawyer
     end
@@ -34,7 +42,17 @@ class Api::V1::LawyersController < ApplicationController
     private
     
     def lawyer_params
-        params.require(:lawyer).permit(:first_name, :last_name, :cases, :retainer, :profile)
+        params.require(:lawyer).permit(
+            :first_name, 
+            :last_name, 
+            :cases, 
+            :retainer, 
+            :profile,
+            :practice,
+            :position,
+            :law_school,
+            :email,
+            :phone)
     end
 
 end
